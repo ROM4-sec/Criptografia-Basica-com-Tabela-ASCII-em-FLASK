@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cripto ASCII - Dark Mode</title>
+    <style>
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h2 { color: #00d4ff; text-align: center; margin-bottom: 30px; }
+
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #00d4ff; }
+
+        textarea {
+            width: 100%;
+            height: 120px;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 12px;
+            box-sizing: border-box;
+            font-family: monospace;
+            resize: vertical;
+        }
+
+        .controles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+        }
+
+        input[type="number"] {
+            background: #2d2d2d;
+            border: 1px solid #444;
+            color: white;
+            padding: 8px;
+            border-radius: 4px;
+            width: 60px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-cripto { background-color: #007bff; color: white; }
+        .btn-cripto:hover { background-color: #0056b3; }
+
+        .btn-descripto { background-color: #28a745; color: white; }
+        .btn-descripto:hover { background-color: #1e7e34; }
+
+        .resultado-container {
+            margin-top: 30px;
+            background-color: #1e1e1e;
+            border-left: 5px solid #00d4ff;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        #meuCodigo {
+            background-color: #000000;
+            color: #00ff41; /* Cor clássica de terminal */
+            padding: 15px;
+            border-radius: 5px;
+            word-break: break-all;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+        }
+
+        .btn-copy {
+            background-color: #444;
+            color: white;
+            margin-top: 10px;
+        }
+        .btn-copy:hover { background-color: #666; }
+
+        #avisoCopiado { color: #00ff41; font-size: 0.8em; margin-left: 10px; display: none; }
+    </style>
+</head>
+<body>
+
+    <h2>🔐 Criptografador de Fluxo ASCII</h2>
+    
+    <form method="POST">
+        <label>Mensagem ou Código:</label>
+        <textarea name="texto" placeholder="Digite algo aqui...">{{ texto if texto else '' }}</textarea>
+        
+        <div class="controles">
+            <div>
+                <label>Coeficiente:</label>
+                <input type="number" name="coeficiente" value="{{ coef if coef else 3 }}" min="1" max="10">
+            </div>
+            
+            <div style="display: flex; gap: 10px; margin-top: auto;">
+                <button type="submit" name="acao" value="cripto" class="btn-cripto">Criptografar</button>
+                <button type="submit" name="acao" value="descripto" class="btn-descripto">Descriptografar</button>
+            </div>
+        </div>
+    </form>
+
+    {% if resultado %}
+    <div class="resultado-container">
+        <label>Resultado:</label>
+        <p id="meuCodigo">{{ resultado }}</p>
+        
+        <button onclick="copiarTexto()" class="btn-copy">Copiar Código</button>
+        <span id="avisoCopiado">✔ Copiado com sucesso!</span>
+    </div>
+    {% endif %}
+
+    <script>
+        function copiarTexto() {
+            var textoCopiado = document.getElementById("meuCodigo").innerText;
+            navigator.clipboard.writeText(textoCopiado).then(function() {
+                var aviso = document.getElementById("avisoCopiado");
+                aviso.style.display = "inline";
+                setTimeout(function() {
+                    aviso.style.display = "none";
+                }, 2000);
+            });
+        }
+    </script>
+
+</body>
+</html>
