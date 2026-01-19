@@ -27,7 +27,7 @@ Diferente de uma substituição simples, este algoritmo utiliza quatro pilares d
 
 1.  Clone o repositório:
     ```bash
-    git clone [[https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git](https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git)](https://github.com/ROM4-sec/Criptografia-Basica-com-Tabela-ASCII-em-FLASK.git)
+    git clone https://github.com/ROM4-sec/Criptografia-Basica-com-Tabela-ASCII-em-FLASK.git
     ```
 2.  Instale as dependências:
     ```bash
